@@ -96,7 +96,7 @@ export default function App() {
           <span className="text-xs font-mono" style={{ color: 'var(--accent)' }}>{currentDate}</span>
         </div>
 
-        <div className="flex-1 overflow-auto p-3">
+        <div className="flex-1 overflow-auto p-6">
           {view === 'detail' && (
             <StockDetail
               symbol={selectedSymbol}

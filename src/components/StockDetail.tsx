@@ -52,23 +52,23 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-5">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <h1 className="text-2xl font-bold">{symbol}</h1>
             <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{stock.info.name}</span>
             <span className="text-[10px] px-2 py-0.5 rounded" style={{ background: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>{stock.info.sector}</span>
           </div>
-          <div className="flex items-baseline gap-2 mt-1">
+          <div className="flex items-baseline gap-4 mt-2">
             <span className="text-3xl font-bold font-mono">${current?.close.toFixed(2)}</span>
             <span className="text-lg font-mono" style={{ color: isUp ? 'var(--green)' : 'var(--red)' }}>
               {isUp ? '+' : ''}{change.toFixed(2)} ({isUp ? '+' : ''}{changePct.toFixed(2)}%)
             </span>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <button onClick={onToggleWatchlist} className="btn-ghost flex items-center gap-1" style={{ color: isWatchlisted ? 'var(--yellow)' : undefined }}>
             <Star size={14} fill={isWatchlisted ? 'var(--yellow)' : 'none'} /> {isWatchlisted ? 'Watching' : 'Watch'}
           </button>
@@ -76,8 +76,8 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
       </div>
 
       {/* Quick actions row */}
-      <div className="flex gap-2 flex-wrap">
-        <div className="card flex items-center gap-2 text-xs">
+      <div className="flex gap-4 flex-wrap">
+        <div className="card flex items-center gap-4 text-xs">
           <Bell size={12} style={{ color: 'var(--accent)' }} />
           <input value={alertPrice} onChange={e => setAlertPrice(e.target.value)} placeholder="Price" className="w-16 text-xs" />
           <select value={alertDir} onChange={e => setAlertDir(e.target.value as any)} className="text-xs">
@@ -86,7 +86,7 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
           </select>
           <button className="btn-primary text-xs" onClick={() => { if (alertPrice) { onAddAlert(symbol, +alertPrice, alertDir); setAlertPrice(''); } }}>Set Alert</button>
         </div>
-        <div className="card flex items-center gap-2 text-xs">
+        <div className="card flex items-center gap-4 text-xs">
           <ShoppingCart size={12} style={{ color: 'var(--green)' }} />
           <input value={buyShares} onChange={e => setBuyShares(e.target.value)} className="w-16 text-xs" />
           <span style={{ color: 'var(--text-secondary)' }}>shares</span>
@@ -108,7 +108,7 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-4 border-b" style={{ borderColor: 'var(--border)' }}>
+      <div className="flex gap-6 border-b" style={{ borderColor: 'var(--border)' }}>
         {tabs.map(t => (
           <button
             key={t.key}
@@ -123,8 +123,8 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
 
       {/* Tab content */}
       {tab === 'overview' && (
-        <div className="space-y-3">
-          <div className="flex gap-2 text-xs">
+        <div className="space-y-5">
+          <div className="flex gap-4 text-xs">
             <label className="flex items-center gap-1 cursor-pointer" style={{ color: 'var(--text-secondary)' }}>
               <input type="checkbox" checked={showMA} onChange={() => setShowMA(!showMA)} /> MA
             </label>
@@ -133,7 +133,7 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
             </label>
           </div>
           <CandlestickChart prices={prices} ma20={technicals.ma20} ma50={technicals.ma50} bbUpper={technicals.bbUpper} bbLower={technicals.bbLower} showMA={showMA} showBB={showBB} />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               ['Market Cap', fmt(stock.info.marketCap)],
               ['Volume', current ? current.volume.toLocaleString() : '-'],
@@ -153,7 +153,7 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
           {/* Analyst forecasts */}
           <div className="card">
             <h3 className="text-sm font-semibold mb-2">Analyst Forecasts</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {stock.forecasts.map(f => (
                 <div key={f.analyst} className="p-2 rounded text-xs" style={{ background: 'var(--bg-tertiary)' }}>
                   <div className="font-semibold">{f.analyst}</div>
@@ -200,8 +200,8 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
       )}
 
       {tab === 'valuation' && (
-        <div className="space-y-3">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+        <div className="space-y-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               ['P/E Ratio', stock.info.peRatio.toFixed(1)],
               ['P/B Ratio', stock.info.pbRatio.toFixed(1)],
@@ -255,9 +255,9 @@ export function StockDetail({ symbol, currentDate, isWatchlisted, onToggleWatchl
       )}
 
       {tab === 'technical' && (
-        <div className="space-y-3">
+        <div className="space-y-5">
           <CandlestickChart prices={prices} ma20={technicals.ma20} ma50={technicals.ma50} bbUpper={technicals.bbUpper} bbLower={technicals.bbLower} showMA={true} showBB={true} height={350} />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               ['RSI (14)', technicals.rsi[technicals.rsi.length - 1]?.toFixed(1) ?? '-', technicals.rsi[technicals.rsi.length - 1]! > 70 ? 'var(--red)' : technicals.rsi[technicals.rsi.length - 1]! < 30 ? 'var(--green)' : 'var(--text-primary)'],
               ['MACD', technicals.macdLine[technicals.macdLine.length - 1]?.toFixed(4) ?? '-', (technicals.macdLine[technicals.macdLine.length - 1] ?? 0) > 0 ? 'var(--green)' : 'var(--red)'],
