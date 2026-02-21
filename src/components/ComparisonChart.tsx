@@ -61,7 +61,7 @@ export function ComparisonChart({ symbols, currentDate, allStocks, onChangeSymbo
     <div className="space-y-4">
       <h2 className="text-lg font-bold">Stock Comparison (% Change)</h2>
       <div className="flex flex-wrap gap-2">
-        {allStocks.map((s, i) => (
+        {allStocks.map((s) => (
           <button
             key={s.info.symbol}
             onClick={() => toggleSymbol(s.info.symbol)}
